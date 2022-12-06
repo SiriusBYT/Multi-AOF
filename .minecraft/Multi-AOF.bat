@@ -16,7 +16,7 @@ IF NOT EXIST "%cd%\serverstarter-2.4.0.jar" (
    echo >nul
    echo [Multi-AOF] Looks like it's your first time running this tool then !
    echo [Multi-AOF] Please note due to my lack of programming knowledge I cannot currently modify "serverstarter" to make this process fully automatic.
-   echo [Multi-AOF] So unfortuanely, once serverstarter starts, you will need when prompted, to NOT agree to the Minecraft EULA (instead close the program).
+   echo [Multi-AOF] So unfortuanely, once serverstarter starts, you will need when prompted, to NOT agree to the Minecraft EULA {instead close the program}.
    echo [Multi-AOF] After that is done, please relaunch Multi-AOF.bat so that the MultiMC Instance can be created.
    echo >nul
    echo Press any key to proceed with the Download of ServerStarter.
