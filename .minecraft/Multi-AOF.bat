@@ -59,7 +59,6 @@ set "DotMC=%cd%"
 cd ..
 set "MultInst=%cd%"
 cd ..
-cd ..
 set "ZipLoc=%cd%"
 
 REM ECHOs the variables just to make sure and tells the user where the Instance ZIP File will be.
@@ -76,8 +75,6 @@ del .fabric /F /Q
 echo [Multi-AOF] Deleted .fabric Folder
 del libraries /F /Q
 echo [Multi-AOF] Deleted libraries Folder
-del versions /F /Q
-echo [Multi-AOF] Deleted versions Folder
 del versions /F /Q
 echo [Multi-AOF] Deleted versions Folder
 del fabricloader.log /F /Q
