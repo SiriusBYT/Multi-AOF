@@ -1,6 +1,3 @@
-<h1>Warning: Multi-AOF SID is NOT stable and breaks VERY OFTEN !</h1>
-<h2>Please use the "Release" branch !</h2>
-
 <h1>What is Multi-AOF?</h1>
 Multi-AOF is an edited version of Team AOF's StartServer.bat Script to allow the user to automatically create a MultiMC .ZIP Instance.
 
