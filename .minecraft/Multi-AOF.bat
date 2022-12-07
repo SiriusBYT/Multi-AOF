@@ -10,7 +10,17 @@ REM For example, if "run as admin" the batch starting dir could be system32
 CD "%~dp0" >nul 2>&1
 
 :CHECK
-REM Check if serverstarter JAR is already downloaded
+
+REM Checks if SSConfig is present, if not then the user did an oopsie. 
+IF NOT EXIST "%cd%\server-setup-config.yaml" (
+	ECHO [Multi-AOF] server-setup-config.yaml is missing ! Cannot continue the script !
+   echo [Multi-AOF] Please put your modpack's YAML into %cd% and relaunch the script.
+   pause
+   exit
+) 
+
+REM Checks if SS is present, if not then the script's first phase is triggered, else the Instance will be made.
+REM Warning will be issued if the ZIP File already exists.
 IF NOT EXIST "%cd%\serverstarter-2.4.0.jar" (
 	ECHO [Multi-AOF] Team AOF's ServerStarter Binary is missing ! Will be downloading it using their GitHub repository...
    echo >nul
@@ -43,23 +53,72 @@ IF NOT EXIST "%cd%\serverstarter-2.4.0.jar" (
 )
 
 :MAIN 
+REM Sets some variables to be used to make the ZIP file.
 cd %cd%
 set "DotMC=%cd%"
 cd ..
 set "MultInst=%cd%"
+cd ..
+cd ..
+set "ZipLoc=%cd%"
+
+REM ECHOs the variables just to make sure and tells the user where the Instance ZIP File will be.
 echo [Multi-AOF] The .minecraft folder is located at "%DotMC%"
 echo [Multi-AOF] The MultiMC Instance folder is located at "%MultInst%"
+echo [Multi-AOF] The Instance ZIP File will be located at %ZipLoc%\Multi-AOF.zip
+
 echo [Multi-AOF] Installing "7Zip4Powershell" Powershell Module...
 powershell "Install-Module -Name 7Zip4PowerShell -Verbose -Scope CurrentUser"
+
 echo [Multi-AOF] Now cleaning up Files... (Removing Server Files)
+cd %DotMC%
+del .fabric /F /Q
+echo [Multi-AOF] Deleted .fabric Folder
+del libraries /F /Q
+echo [Multi-AOF] Deleted libraries Folder
+del versions /F /Q
+echo [Multi-AOF] Deleted versions Folder
+del versions /F /Q
+echo [Multi-AOF] Deleted versions Folder
+del fabricloader.log /F /Q
+echo [Multi-AOF] Deleted fabricloader.log File
+del fabric-server-launch.jar /F /Q
+echo [Multi-AOF] Deleted fabric-server-launch.jar File
+del fabric-server-launcher.properties /F /Q
+echo [Multi-AOF] Deleted fabric-server-launcher.properties File
+del Insert-SSConfig_Here.yaml /F /Q
+echo [Multi-AOF] Deleted Insert-SSConfig_Here.yaml File
+del manifest.json /F /Q
+echo [Multi-AOF] Deleted manifest.json File
+del modpack-download.zip /F /Q
+echo [Multi-AOF] Deleted modpack-download.zip File
+del server.jar /F /Q
+echo [Multi-AOF] Deleted server.jar File
+del serverstarter.lock /F /Q
+echo [Multi-AOF] Deleted serverstarter.lock File
+del serverstarter.log /F /Q
+echo [Multi-AOF] Deleted serverstarter.log File
+
+REM Asked to delete SSConfig if the user perhaps wants to update the modpack?
+del server-setup-config.yaml /F /P
+
+cd ..
+del LICENSE.md /F /Q
+echo [Multi-AOF] Deleted LICENSE.md File
+del README.md /F /Q
+echo [Multi-AOF] Deleted README.md File
 
 echo [Multi-AOF] Creating a MultiMC ZIP Instance using Powershell...
 cd ..
 powershell "Compress-7zip -Path '%MultInst%' -ArchiveFilename 'Multi-AOF.zip' -Format Zip"
+echo [Multi-AOF] Uninstalling the module "7Zip4Powershell"
+powershell "Uninstall-Module -Name 7Zip4PowerShell"
 GOTO EOF
 
 :EOF
 echo >nul
-echo [Multi-AOF] Operation Complete. Drag and drop the Multi-AOF.zip file located in %cd% to your MultiMC Window !
-start explorer.exe "%cd%"
+echo [Multi-AOF] Operation Complete. Drag and drop the Multi-AOF.zip file located in %ZipLoc% to your MultiMC Window !
+echo [Multi-AOF] Warning: By default, Multi-AOF comes with an Instance that identifies as 1.19.2 - 0.14.11 Fabric.
+echo [Multi-AOF] If this doesn't match your modpack version, please edit it in "Version" under "Edit Instance".
+start explorer.exe "%ZipLoc%"
 pause
