@@ -21,11 +21,16 @@ IF NOT EXIST "%cd%\serverstarter-2.4.0.jar" (
    echo >nul
    echo Press any key to proceed with the Download of ServerStarter.
    pause >nul
+   echo [Multi-AOF] Now installing ServerStarter...
 	%SYSTEMROOT%\SYSTEM32\bitsadmin.exe /rawreturn /nowrap /transfer starter /dynamic /download /priority foreground https://github.com/TeamAOF/ServerStarter/releases/download/v2.4.0/serverstarter-2.4.0.jar "%cd%\serverstarter-2.4.0.jar"
    java -jar serverstarter-2.4.0.jar
    GOTO MAIN
 ) ELSE (
    ECHO [Multi-AOF] Team AOF's ServerStarter Binary is present.
+   echo [Multi-AOF] Due to issues with Powershell's "Compress-Archive", the module "7Zip4Powershell" needs to be installed.
+   echo [Multi-AOF] It will be uninstalled during cleanup.
+   echo If you're okay with this script installing this module, then press any key to continue.
+   pause >nul
    IF EXIST "%cd%\Multi-AOF.zip" (
       echo [MultiMC] WARNING: Multi-AOF.zip already exists ! Proceeding will delete the old instance's zip file !
       echo Press any key to continue anyway.
@@ -44,12 +49,17 @@ cd ..
 set "MultInst=%cd%"
 echo [Multi-AOF] The .minecraft folder is located at "%DotMC%"
 echo [Multi-AOF] The MultiMC Instance folder is located at "%MultInst%"
+echo [Multi-AOF] Installing "7Zip4Powershell" Powershell Module...
+powershell "Install-Module -Name 7Zip4PowerShell -Verbose -Scope CurrentUser"
+echo [Multi-AOF] Now cleaning up Files... (Removing Server Files)
+
 echo [Multi-AOF] Creating a MultiMC ZIP Instance using Powershell...
-powershell "Compress-Archive '%MultInst%\*' '%DotMC%\Multi-AOF.zip'"
+cd ..
+powershell "Compress-7zip -Path '%MultInst%' -ArchiveFilename 'Multi-AOF.zip' -Format Zip"
 GOTO EOF
 
 :EOF
 echo >nul
-echo [Multi-AOF] Operation Complete. Drag and drop the Multi-AOF.zip file located in %MultInst% to your MultiMC Window !
-start explorer.exe "%DotMC%"
+echo [Multi-AOF] Operation Complete. Drag and drop the Multi-AOF.zip file located in %cd% to your MultiMC Window !
+start explorer.exe "%cd%"
 pause
