@@ -1,4 +1,4 @@
-#Warning: Multi-AOF SID is NOT stable and breaks VERY OFTEN !
+Warning: Multi-AOF SID is NOT stable and breaks VERY OFTEN !
 Please use the "Release" branch :
 
 # What is Multi-AOF?
@@ -7,5 +7,16 @@ No plans for any port on GNU/Linux systems. If you're using that, then you proba
 
 Due to current limitations (from the lack of programming knowledge on my part) the setup is odd but it works.
 
-#Instructions
+Instructions
 TBD
+
+Notice: 
+IF you see the following message when installing the 7zip Powershell Module:
+
+Untrusted repository
+You are installing the modules from an untrusted repository. If you trust this repository, change its
+InstallationPolicy value by running the Set-PSRepository cmdlet. Are you sure you want to install the modules from
+'PSGallery'?
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "N"):
+
+Please press Y and then enter.
