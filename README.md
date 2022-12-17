@@ -45,6 +45,8 @@ Please press Y and then enter.
 
 <h4>Tested Modpacks</h4>
 - All of Fabric 5's Server YAML
+- All of Fabric 6's Server YAML (v1.10)
 
 <h4>Tested Windows Versions</h4>
 - Windows 11 Enterprise N Insider Dev (Build 25252.1010)
+- Windows 11 Enterprise N Insider Dev (Build 25267.1010)
