@@ -134,7 +134,7 @@ GOTO EOF
 
 :EOF
 echo >nul
-echo [Multi-AOF] Operation Complete. Drag and drop the Multi-AOF.zip file located in %ZipLoc% to your MultiMC Window !
+echo [Multi-AOF] Operation Complete. Drag and drop the %InstanceName%.zip file located in %ZipLoc% to your MultiMC Window !
 echo [Multi-AOF] Warning: By default, Multi-AOF comes with an Instance that identifies as 1.19.2 - 0.14.11 Fabric.
 echo [Multi-AOF] If this doesn't match your modpack version, please edit it in "Version" under "Edit Instance".
 start explorer.exe "%ZipLoc%"
