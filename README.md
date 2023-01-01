@@ -44,11 +44,18 @@ InstallationPolicy value by running the Set-PSRepository cmdlet. Are you sure yo
 Please press Y and then enter.
 
 <h4>Tested Modpacks</h4>
-- All of Fabric 5's Server YAML
+All of Fabric 5:
+- All of Fabric 5's Server YAML (v2.6.0)
+
+All of Fabric 6:
+- All of Fabric 6's Server YAML (v1.10)
+- All of Fabric 6's Server YAML (v1.20)
+- All of Fabric 6's Server YAML (v1.20-SGN) (see https://download.siriusbyt.ga/multi-aof/Multi-AOF6_v1.2.0-SGN.7z)
 
 - All of Fabric 6's Server YAML (v1.10)
 
 <h4>Tested Windows Versions</h4>
-- Windows 11 Enterprise N Insider Dev (Build 25252.1010)
 
+Windows 11 N:
+- Windows 11 Enterprise N Insider Dev (Build 25252.1010)
 - Windows 11 Enterprise N Insider Dev (Build 25267.1010)
