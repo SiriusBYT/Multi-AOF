@@ -35,16 +35,6 @@ IF NOT EXIST "%cd%\serverstarter-2.4.0.jar" (
    java -jar serverstarter-2.4.0.jar
    GOTO MAIN
 ) ELSE (
-   ECHO [Multi-AOF] Team AOF's ServerStarter Binary is present.
-   echo [Multi-AOF] Due to issues with Powershell's "Compress-Archive", the module "7Zip4Powershell" needs to be installed.
-   echo [Multi-AOF] It will be uninstalled during cleanup.
-   echo If you're okay with this script installing this module, then press any key to continue.
-   echo >nul
-   echo [Multi-AOF] Please type the Instance's name, leaving it blank will default to "Multi-AOF".
-   set "InstanceName="
-   set /P InstanceName=
-   if not defined var set "InstanceName=Multi-AOF"
-   pause >nul
    IF EXIST "%cd%\%InstanceName%.zip" (
       echo [MultiMC] WARNING: %InstanceName%.zip already exists ! Proceeding will delete the old instance's zip file !
       echo Press any key to continue anyway.
@@ -52,9 +42,24 @@ IF NOT EXIST "%cd%\serverstarter-2.4.0.jar" (
       del "%cd%\%InstanceName%.zip" /F
       echo [MultiMC] The old instance was deleted.
       echo >nul
+      goto CHECK
    )
-   GOTO MAIN
+   GOTO NAME
 )
+
+:NAME
+ECHO [Multi-AOF] Team AOF's ServerStarter Binary is present.
+echo [Multi-AOF] Due to issues with Powershell's "Compress-Archive", the module "7Zip4Powershell" needs to be installed.
+echo [Multi-AOF] It will be uninstalled during cleanup.
+echo If you're okay with this script installing this module, then press any key to continue.
+pause >nul
+echo >nul
+echo [Multi-AOF] Please type the Instance's name, leaving it blank will default to "Multi-AOF".
+set InstanceName=Multi-AOF
+set /P InstanceName=
+echo [Multi-AOF] Instance will be named %InstanceName%
+pause
+GOTO MAIN
 
 :MAIN 
 REM Sets some variables to be used to make the ZIP file.
@@ -71,17 +76,19 @@ echo [Multi-AOF] The MultiMC Instance folder is located at "%MultInst%"
 echo [Multi-AOF] The Instance ZIP File will be located at %ZipLoc%\%InstanceName%.zip
 cd %DotMC%
 
+echo %DotMC%\Extra-Mods\*.jar %DotMC%\mods 
 echo [Multi-AOF] Inserting Extra Mods (if present)...
-move %DotMC%\Extra-Mods\* %DotMC\mods 
+move Extra-Mods\*.jar mods\ 
+pause
 
 echo [Multi-AOF] Inserting Extra Resource Packs (if present)...
 mkdir ressourcepacks
-move %DotMC%\Extra-Resource_Packs\* %DotMC\resourcepacks 
+move Extra-Resource_Packs\*.zip resourcepacks\
 
 echo [Multi-AOF] Inserting Extra Shader Packs (if present)...
 mkdir shaderpacks
-move %DotMC%\Extra-Shader_Packs\* %DotMC\shaderpacks 
-
+move Extra-Shader_Packs\*.zip shaderpack\
+move Extra-Resource_Packs\*.txt shaderpacks\
 
 
 echo [Multi-AOF] Installing "7Zip4Powershell" Powershell Module...
