@@ -24,10 +24,9 @@ REM Warning will be issued if the ZIP File already exists.
 IF NOT EXIST "%cd%\serverstarter-2.4.0.jar" (
 	ECHO [Multi-AOF] Team AOF's ServerStarter Binary is missing ! Will be downloading it using their GitHub repository...
    echo >nul
-   echo [Multi-AOF] Looks like it's your first time running this tool then !
-   echo [Multi-AOF] Please note due to my lack of programming knowledge I cannot currently modify "serverstarter" to make this process fully automatic.
-   echo [Multi-AOF] So unfortuanely, once serverstarter starts, you will need when prompted, to NOT agree to the Minecraft EULA {instead close the program}.
-   echo [Multi-AOF] After that is done, please relaunch Multi-AOF.bat so that the MultiMC Instance can be created.
+   echo [Multi-AOF] Once serverstarter starts, you will need when prompted, to NOT agree to the Minecraft EULA.
+   echo [Multi-AOF] Please close the program instead.
+   echo [Multi-AOF] After that is done, please relaunch the Multi-AOF Script.
    echo >nul
    echo Press any key to proceed with the Download of ServerStarter.
    pause >nul
@@ -40,12 +39,17 @@ IF NOT EXIST "%cd%\serverstarter-2.4.0.jar" (
    echo [Multi-AOF] Due to issues with Powershell's "Compress-Archive", the module "7Zip4Powershell" needs to be installed.
    echo [Multi-AOF] It will be uninstalled during cleanup.
    echo If you're okay with this script installing this module, then press any key to continue.
+   echo >nul
+   echo [Multi-AOF] Please type the Instance's name, leaving it blank will default to "Multi-AOF".
+   set "InstanceName="
+   set /P InstanceName=
+   if not defined var set "InstanceName=Multi-AOF"
    pause >nul
-   IF EXIST "%cd%\Multi-AOF.zip" (
-      echo [MultiMC] WARNING: Multi-AOF.zip already exists ! Proceeding will delete the old instance's zip file !
+   IF EXIST "%cd%\%InstanceName%.zip" (
+      echo [MultiMC] WARNING: %InstanceName%.zip already exists ! Proceeding will delete the old instance's zip file !
       echo Press any key to continue anyway.
       pause >nul
-      del "%cd%\Multi-AOF.zip" /F
+      del "%cd%\%InstanceName%.zip" /F
       echo [MultiMC] The old instance was deleted.
       echo >nul
    )
@@ -64,7 +68,7 @@ set "ZipLoc=%cd%"
 REM ECHOs the variables just to make sure and tells the user where the Instance ZIP File will be.
 echo [Multi-AOF] The .minecraft folder is located at "%DotMC%"
 echo [Multi-AOF] The MultiMC Instance folder is located at "%MultInst%"
-echo [Multi-AOF] The Instance ZIP File will be located at %ZipLoc%\Multi-AOF.zip
+echo [Multi-AOF] The Instance ZIP File will be located at %ZipLoc%\%InstanceName%.zip
 
 echo [Multi-AOF] Installing "7Zip4Powershell" Powershell Module...
 powershell "Install-Module -Name 7Zip4PowerShell -Verbose -Scope CurrentUser"
@@ -106,7 +110,7 @@ echo [Multi-AOF] Deleted README.md File
 
 echo [Multi-AOF] Creating a MultiMC ZIP Instance using Powershell...
 cd ..
-powershell "Compress-7zip -Path '%MultInst%' -ArchiveFilename 'Multi-AOF.zip' -Format Zip"
+powershell "Compress-7zip -Path '%MultInst%' -ArchiveFilename '%InstanceName%.zip' -Format Zip"
 echo [Multi-AOF] Uninstalling the module "7Zip4Powershell"
 powershell "Uninstall-Module -Name 7Zip4PowerShell"
 GOTO EOF
