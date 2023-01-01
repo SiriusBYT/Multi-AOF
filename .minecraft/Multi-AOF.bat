@@ -69,12 +69,25 @@ REM ECHOs the variables just to make sure and tells the user where the Instance 
 echo [Multi-AOF] The .minecraft folder is located at "%DotMC%"
 echo [Multi-AOF] The MultiMC Instance folder is located at "%MultInst%"
 echo [Multi-AOF] The Instance ZIP File will be located at %ZipLoc%\%InstanceName%.zip
+cd %DotMC%
+
+echo [Multi-AOF] Inserting Extra Mods (if present)...
+move %DotMC%\Extra-Mods\* %DotMC\mods 
+
+echo [Multi-AOF] Inserting Extra Resource Packs (if present)...
+mkdir ressourcepacks
+move %DotMC%\Extra-Resource_Packs\* %DotMC\resourcepacks 
+
+echo [Multi-AOF] Inserting Extra Shader Packs (if present)...
+mkdir shaderpacks
+move %DotMC%\Extra-Shader_Packs\* %DotMC\shaderpacks 
+
+
 
 echo [Multi-AOF] Installing "7Zip4Powershell" Powershell Module...
 powershell "Install-Module -Name 7Zip4PowerShell -Verbose -Scope CurrentUser"
 
 echo [Multi-AOF] Now cleaning up Files... (Removing Server Files)
-cd %DotMC%
 del .fabric /F /Q
 echo [Multi-AOF] Deleted .fabric Folder
 del libraries /F /Q
