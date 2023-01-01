@@ -78,18 +78,15 @@ cd %DotMC%
 
 echo %DotMC%\Extra-Mods\*.jar %DotMC%\mods 
 echo [Multi-AOF] Inserting Extra Mods (if present)...
-move Extra-Mods\*.jar mods\ 
-pause
+move Extra-Mods\*.* mods\ 
 
 echo [Multi-AOF] Inserting Extra Resource Packs (if present)...
-mkdir ressourcepacks
-move Extra-Resource_Packs\*.zip resourcepacks\
+mkdir resourcepacks
+move Extra-Resource_Packs\*.* resourcepacks\
 
 echo [Multi-AOF] Inserting Extra Shader Packs (if present)...
 mkdir shaderpacks
-move Extra-Shader_Packs\*.zip shaderpack\
-move Extra-Resource_Packs\*.txt shaderpacks\
-
+move Extra-Shader_Packs\*.* shaderpacks\
 
 echo [Multi-AOF] Installing "7Zip4Powershell" Powershell Module...
 powershell "Install-Module -Name 7Zip4PowerShell -Verbose -Scope CurrentUser"
