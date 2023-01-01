@@ -95,9 +95,8 @@ del serverstarter.lock /F /Q
 echo [Multi-AOF] Deleted serverstarter.lock File
 del serverstarter.log /F /Q
 echo [Multi-AOF] Deleted serverstarter.log File
-
-REM Asked to delete SSConfig if the user perhaps wants to update the modpack?
-del server-setup-config.yaml /F /P
+del server-setup-config.yaml /F /Q
+echo [Multi-AOF] Deleted server-setup-config.yaml File
 
 cd ..
 del LICENSE.md /F /Q
