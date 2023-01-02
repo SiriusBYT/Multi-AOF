@@ -54,6 +54,9 @@ All of Fabric 6:
 
 <h4>Tested Windows Versions</h4>
 
-Windows 11 N:
+Windows 11:
 - Windows 11 Enterprise N Insider Dev (Build 25252.1010)
 - Windows 11 Enterprise N Insider Dev (Build 25267.1010)
+
+Windows 10:
+- Windows 10 Pro (Build 19043.1645)
