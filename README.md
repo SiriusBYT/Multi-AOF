@@ -51,6 +51,7 @@ All of Fabric 6:
 - All of Fabric 6's Server YAML (v1.10)
 - All of Fabric 6's Server YAML (v1.20)
 - All of Fabric 6's Server YAML (v1.20-SGN) (https://download.siriusbyt.ga/multi-aof/Multi-AOF6_v1.2.0-SGN.7z)
+- All of Fabric 6's Server YAML (v1.30-SGN) (https://download.siriusbyt.ga/multi-aof/Multi-AOF6_v1.3.0-SGN.7z)
 
 <h4>Tested Windows Versions</h4>
 
