@@ -214,6 +214,7 @@ echo - [Automatic] Delete Common Server Files.
 echo - [Automatic] Create a .ZIP that's compatible with Multi-MC ^<--
 echo - [Automatic] Uninstall "7Zip4Powershell"
 echo.
+cd ..
 powershell "Compress-7zip -Path '%MultInst%' -ArchiveFilename '%InstanceName%.zip' -Format Zip"
 
 CLS
