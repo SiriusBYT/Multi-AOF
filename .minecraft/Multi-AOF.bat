@@ -183,6 +183,9 @@ del .fabric /F /Q
 del libraries /F /Q
 del versions /F /Q
 del log /F /Q
+del Extra-Mods /F /Q
+del Extra-Ressource_Packs /F /Q
+del Extra-Shader_Packs /F /Q
 del fabricloader.log /F /Q
 del fabric-server-launch.jar /F /Q
 del fabric-server-launcher.properties /F /Q
@@ -191,6 +194,7 @@ del manifest.json /F /Q
 del modpack-download.zip /F /Q
 del server.jar /F /Q
 del serverstarter.lock /F /Q
+del serverstarter.log /F /Q
 del server-setup-config.yaml /F /Q
 del server-setup-config.yaml /F /Q
 del serverstarter-2.4.0.jar /F /Q
