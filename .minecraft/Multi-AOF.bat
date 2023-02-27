@@ -1,5 +1,6 @@
 @ECHO OFF
 SETLOCAL
+mode con: cols=320 lines=80
 
 :BEGIN
 CLS
@@ -13,55 +14,17 @@ CD "%~dp0" >nul 2>&1
 
 REM Checks if SSConfig is present, if not then the user did an oopsie. 
 IF NOT EXIST "%cd%\server-setup-config.yaml" (
-	ECHO [Multi-AOF] server-setup-config.yaml is missing ! Cannot continue the script !
-   echo [Multi-AOF] Please put your modpack's YAML into %cd% and relaunch the script.
-   pause
+   echo Multi-AOF 1.2 - Setup Script
+   echo.
+   echo Welcome to Multi-AOF ! This is a batch script that will download a modpack and inject extra mods, ressources and shader packs to then create a Multi-MC Instance.
+   echo However it seems that "server-setup-config.yaml" is missing in %cd%.
+   echo Please add that file in order for the Script to be able to execute.
+   echo.
+   echo Press any key to exit the program.
+   pause >nul
    exit
 ) 
 
-REM Checks if SS is present, if not then the script's first phase is triggered, else the Instance will be made.
-REM Warning will be issued if the ZIP File already exists.
-IF NOT EXIST "%cd%\serverstarter-2.4.0.jar" (
-	ECHO [Multi-AOF] Team AOF's ServerStarter Binary is missing ! Will be downloading it using their GitHub repository...
-   echo >nul
-   echo [Multi-AOF] Once serverstarter starts, you will need when prompted, to NOT agree to the Minecraft EULA.
-   echo [Multi-AOF] Please close the program instead.
-   echo [Multi-AOF] After that is done, please relaunch the Multi-AOF Script.
-   echo >nul
-   echo Press any key to proceed with the Download of ServerStarter.
-   pause >nul
-   echo [Multi-AOF] Now installing ServerStarter...
-	%SYSTEMROOT%\SYSTEM32\bitsadmin.exe /rawreturn /nowrap /transfer starter /dynamic /download /priority foreground https://github.com/TeamAOF/ServerStarter/releases/download/v2.4.0/serverstarter-2.4.0.jar "%cd%\serverstarter-2.4.0.jar"
-   java -jar serverstarter-2.4.0.jar
-   GOTO MAIN
-) ELSE (
-   IF EXIST "%cd%\%InstanceName%.zip" (
-      echo [MultiMC] WARNING: %InstanceName%.zip already exists ! Proceeding will delete the old instance's zip file !
-      echo Press any key to continue anyway.
-      pause >nul
-      del "%cd%\%InstanceName%.zip" /F
-      echo [MultiMC] The old instance was deleted.
-      echo >nul
-      goto CHECK
-   )
-   GOTO NAME
-)
-
-:NAME
-ECHO [Multi-AOF] Team AOF's ServerStarter Binary is present.
-echo [Multi-AOF] Due to issues with Powershell's "Compress-Archive", the module "7Zip4Powershell" needs to be installed.
-echo [Multi-AOF] It will be uninstalled during cleanup.
-echo If you're okay with this script installing this module, then press any key to continue.
-pause >nul
-echo >nul
-echo [Multi-AOF] Please type the Instance's name, leaving it blank will default to "Multi-AOF".
-set InstanceName=Multi-AOF
-set /P InstanceName=
-echo [Multi-AOF] Instance will be named %InstanceName%
-pause
-GOTO MAIN
-
-:MAIN 
 REM Sets some variables to be used to make the ZIP file.
 cd %cd%
 set "DotMC=%cd%"
@@ -70,72 +33,215 @@ set "MultInst=%cd%"
 cd ..
 set "ZipLoc=%cd%"
 
-REM ECHOs the variables just to make sure and tells the user where the Instance ZIP File will be.
-echo [Multi-AOF] The .minecraft folder is located at "%DotMC%"
-echo [Multi-AOF] The MultiMC Instance folder is located at "%MultInst%"
-echo [Multi-AOF] The Instance ZIP File will be located at %ZipLoc%\%InstanceName%.zip
+echo Multi-AOF 1.2 - Setup Script
+echo.
+echo Welcome to Multi-AOF ! This is a batch script that will download a modpack and inject extra mods, ressources and shader packs to then create a Multi-MC Instance.
+echo Before starting, please note that the following steps will be done:
+echo - [Automatic] Download ServerStarter 2.4.0 from TeamAOF's GitHub.
+echo - [Automatic] Launch another terminal that downloads the base modpack using ServerStarter.
+echo - [Manual] Set the Multi-MC Instance Name.
+echo - [Semi-Automatic] Allow if asked to download dependencies and to trust "7Zip4Powershell" to be temporarely downloaded despite being on an "insecure" repository.
+echo - [Manual] Close ServerStarter to be able to continue the script when asked to agree to Mojang's EULA.
+echo - [Automatic] Inserts Extra Mods, Ressources and then Shader Packs into their respective folders.
+echo - [Automatic] Delete Common Server Files.
+echo - [Automatic] Create a .ZIP that's compatible with Multi-MC
+echo - [Automatic] Uninstall "7Zip4Powershell"
+echo.
+echo If this seems entirely fine to you then feel free to press any key to start the Script !
+pause >nul
+
+CLS
+
+echo Multi-AOF 1.2 - Setup Script
+echo.
+echo Excecuting Script...
+echo - [Automatic] Download ServerStarter 2.4.0 from TeamAOF's GitHub. <-
+echo - [Automatic] Launch another terminal that downloads the base modpack using ServerStarter.
+echo - [Manual] Set the Multi-MC Instance Name.
+echo - [Semi-Automatic] Allow if asked to download dependencies and to trust "7Zip4Powershell" to be temporarely downloaded despite being on an "insecure" repository.
+echo - [Manual] Close ServerStarter to be able to continue the script when asked to agree to Mojang's EULA.
+echo - [Automatic] Inserts Extra Mods, Ressources and then Shader Packs into their respective folders.
+echo - [Automatic] Delete Common Server Files.
+echo - [Automatic] Create a .ZIP that's compatible with Multi-MC
+echo - [Automatic] Uninstall "7Zip4Powershell"
+echo.
+
+IF NOT EXIST "%cd%\serverstarter-2.4.0.jar" (
+	%SYSTEMROOT%\SYSTEM32\bitsadmin.exe /rawreturn /nowrap /transfer starter /dynamic /download /priority foreground https://github.com/TeamAOF/ServerStarter/releases/download/v2.4.0/serverstarter-2.4.0.jar
+)
+CLS
+
+echo Multi-AOF 1.2 - Setup Script
+echo.
+echo Excecuting Script...
+echo - [Automatic] Download ServerStarter 2.4.0 from TeamAOF's GitHub. 
+echo - [Automatic] Launch another terminal that downloads the base modpack using ServerStarter. <-
+echo - [Manual] Set the Multi-MC Instance Name.
+echo - [Semi-Automatic] Allow if asked to download dependencies and to trust "7Zip4Powershell" to be temporarely downloaded despite being on an "insecure" repository.
+echo - [Manual] Close ServerStarter to be able to continue the script when asked to agree to Mojang's EULA.
+echo - [Automatic] Inserts Extra Mods, Ressources and then Shader Packs into their respective folders.
+echo - [Automatic] Delete Common Server Files.
+echo - [Automatic] Create a .ZIP that's compatible with Multi-MC
+echo - [Automatic] Uninstall "7Zip4Powershell"
+echo.
 cd %DotMC%
+start SSJD.bat
 
-echo %DotMC%\Extra-Mods\*.jar %DotMC%\mods 
-echo [Multi-AOF] Inserting Extra Mods (if present)...
+CLS
+
+echo Multi-AOF 1.2 - Setup Script
+echo.
+echo Excecuting Script...
+echo - [Automatic] Download ServerStarter 2.4.0 from TeamAOF's GitHub.
+echo - [Automatic] Launch another terminal that downloads the base modpack using ServerStarter.
+echo - [Manual] Set the Multi-MC Instance Name. <-
+echo - [Semi-Automatic] Allow if asked to download dependencies and to trust "7Zip4Powershell" to be temporarely downloaded despite being on an "insecure" repository.
+echo - [Manual] Close ServerStarter to be able to continue the script when asked to agree to Mojang's EULA.
+echo - [Automatic] Inserts Extra Mods, Ressources and then Shader Packs into their respective folders.
+echo - [Automatic] Delete Common Server Files.
+echo - [Automatic] Create a .ZIP that's compatible with Multi-MC
+echo - [Automatic] Uninstall "7Zip4Powershell"
+echo.
+echo [Multi-AOF] Please type the Instance's name, leaving it blank will default to "Multi-AOF".
+set InstanceName=Multi-AOF
+set /P InstanceName=
+
+CLS
+
+echo Multi-AOF 1.2 - Setup Script
+echo.
+echo Excecuting Script...
+echo - [Automatic] Download ServerStarter 2.4.0 from TeamAOF's GitHub.
+echo - [Automatic] Launch another terminal that downloads the base modpack using ServerStarter.
+echo - [Manual] Set the Multi-MC Instance Name. (%InstanceName%)
+echo - [Semi-Automatic] Allow if asked to download dependencies and to trust "7Zip4Powershell" to be temporarely downloaded despite being on an "insecure" repository. <-
+echo - [Manual] Close ServerStarter to be able to continue the script when asked to agree to Mojang's EULA.
+echo - [Automatic] Inserts Extra Mods, Ressources and then Shader Packs into their respective folders.
+echo - [Automatic] Delete Common Server Files.
+echo - [Automatic] Create a .ZIP that's compatible with Multi-MC
+echo - [Automatic] Uninstall "7Zip4Powershell"
+echo.
+powershell "Install-Module -Name 7Zip4PowerShell -Verbose -Scope CurrentUser"
+
+CLS
+
+echo Multi-AOF 1.2 - Setup Script
+echo.
+echo Excecuting Script...
+echo - [Automatic] Download ServerStarter 2.4.0 from TeamAOF's GitHub.
+echo - [Automatic] Launch another terminal that downloads the base modpack using ServerStarter.
+echo - [Manual] Set the Multi-MC Instance Name. (%InstanceName%)
+echo - [Semi-Automatic] Allow if asked to download dependencies and to trust "7Zip4Powershell" to be temporarely downloaded despite being on an "insecure" repository.
+echo - [Manual] Close ServerStarter to be able to continue the script when asked to agree to Mojang's EULA. <-
+echo - [Automatic] Inserts Extra Mods, Ressources and then Shader Packs into their respective folders.
+echo - [Automatic] Delete Common Server Files.
+echo - [Automatic] Create a .ZIP that's compatible with Multi-MC
+echo - [Automatic] Uninstall "7Zip4Powershell"
+echo.
+echo [Multi-AOF] Press any key ONLY after closing ServerStarter IF AND ONLY the other Terminal Window asks you to agree to Minecraft's EULA.
+pause >nul
+
+CLS
+
+echo Multi-AOF 1.2 - Setup Script
+echo.
+echo Excecuting Script...
+echo - [Automatic] Download ServerStarter 2.4.0 from TeamAOF's GitHub.
+echo - [Automatic] Launch another terminal that downloads the base modpack using ServerStarter.
+echo - [Manual] Set the Multi-MC Instance Name. (%InstanceName%)
+echo - [Semi-Automatic] Allow if asked to download dependencies and to trust "7Zip4Powershell" to be temporarely downloaded despite being on an "insecure" repository.
+echo - [Manual] Close ServerStarter to be able to continue the script when asked to agree to Mojang's EULA.
+echo - [Automatic] Inserts Extra Mods, Ressources and then Shader Packs into their respective folders. <-
+echo - [Automatic] Delete Common Server Files.
+echo - [Automatic] Create a .ZIP that's compatible with Multi-MC
+echo - [Automatic] Uninstall "7Zip4Powershell"
+echo.
+cd %DotMC%
+mkdir mods
 move Extra-Mods\*.* mods\ 
-
-echo [Multi-AOF] Inserting Extra Resource Packs (if present)...
 mkdir resourcepacks
 move Extra-Resource_Packs\*.* resourcepacks\
-
-echo [Multi-AOF] Inserting Extra Shader Packs (if present)...
 mkdir shaderpacks
 move Extra-Shader_Packs\*.* shaderpacks\
 
-echo [Multi-AOF] Installing "7Zip4Powershell" Powershell Module...
-powershell "Install-Module -Name 7Zip4PowerShell -Verbose -Scope CurrentUser"
+CLS
 
-echo [Multi-AOF] Now cleaning up Files... (Removing Server Files)
+echo Multi-AOF 1.2 - Setup Script
+echo.
+echo Excecuting Script...
+echo - [Automatic] Download ServerStarter 2.4.0 from TeamAOF's GitHub.
+echo - [Automatic] Launch another terminal that downloads the base modpack using ServerStarter.
+echo - [Manual] Set the Multi-MC Instance Name. (%InstanceName%)
+echo - [Semi-Automatic] Allow if asked to download dependencies and to trust "7Zip4Powershell" to be temporarely downloaded despite being on an "insecure" repository.
+echo - [Manual] Close ServerStarter to be able to continue the script when asked to agree to Mojang's EULA.
+echo - [Automatic] Inserts Extra Mods, Ressources and then Shader Packs into their respective folders.
+echo - [Automatic] Delete Common Server Files. <-
+echo - [Automatic] Create a .ZIP that's compatible with Multi-MC
+echo - [Automatic] Uninstall "7Zip4Powershell"
+echo.
 del .fabric /F /Q
-echo [Multi-AOF] Deleted .fabric Folder
 del libraries /F /Q
-echo [Multi-AOF] Deleted libraries Folder
 del versions /F /Q
-echo [Multi-AOF] Deleted versions Folder
+del log /F /Q
 del fabricloader.log /F /Q
-echo [Multi-AOF] Deleted fabricloader.log File
 del fabric-server-launch.jar /F /Q
-echo [Multi-AOF] Deleted fabric-server-launch.jar File
 del fabric-server-launcher.properties /F /Q
-echo [Multi-AOF] Deleted fabric-server-launcher.properties File
 del Insert-SSConfig_Here.yaml /F /Q
-echo [Multi-AOF] Deleted Insert-SSConfig_Here.yaml File
 del manifest.json /F /Q
-echo [Multi-AOF] Deleted manifest.json File
 del modpack-download.zip /F /Q
-echo [Multi-AOF] Deleted modpack-download.zip File
 del server.jar /F /Q
-echo [Multi-AOF] Deleted server.jar File
 del serverstarter.lock /F /Q
-echo [Multi-AOF] Deleted serverstarter.lock File
-del serverstarter.log /F /Q
-echo [Multi-AOF] Deleted serverstarter.log File
 del server-setup-config.yaml /F /Q
-echo [Multi-AOF] Deleted server-setup-config.yaml File
-
+del server-setup-config.yaml /F /Q
+del serverstarter-2.4.0.jar /F /Q
+del SSJD.bat /F /Q
 cd ..
 del LICENSE.md /F /Q
-echo [Multi-AOF] Deleted LICENSE.md File
 del README.md /F /Q
-echo [Multi-AOF] Deleted README.md File
 
-echo [Multi-AOF] Creating a MultiMC ZIP Instance using Powershell...
-cd ..
+CLS
+
+echo Multi-AOF 1.2 - Setup Script
+echo.
+echo Excecuting Script...
+echo - [Automatic] Download ServerStarter 2.4.0 from TeamAOF's GitHub.
+echo - [Automatic] Launch another terminal that downloads the base modpack using ServerStarter.
+echo - [Manual] Set the Multi-MC Instance Name. (%InstanceName%)
+echo - [Semi-Automatic] Allow if asked to download dependencies and to trust "7Zip4Powershell" to be temporarely downloaded despite being on an "insecure" repository.
+echo - [Manual] Close ServerStarter to be able to continue the script when asked to agree to Mojang's EULA.
+echo - [Automatic] Inserts Extra Mods, Ressources and then Shader Packs into their respective folders.
+echo - [Automatic] Delete Common Server Files.
+echo - [Automatic] Create a .ZIP that's compatible with Multi-MC <-
+echo - [Automatic] Uninstall "7Zip4Powershell"
+echo.
 powershell "Compress-7zip -Path '%MultInst%' -ArchiveFilename '%InstanceName%.zip' -Format Zip"
-echo [Multi-AOF] Uninstalling the module "7Zip4Powershell"
-powershell "Uninstall-Module -Name 7Zip4PowerShell"
-GOTO EOF
 
-:EOF
-echo >nul
-echo [Multi-AOF] Operation Complete. Drag and drop the %InstanceName%.zip file located in %ZipLoc% to your MultiMC Window !
-echo [Multi-AOF] Warning: By default, Multi-AOF comes with an Instance that identifies as 1.19.2 - 0.14.11 Fabric.
-echo [Multi-AOF] If this doesn't match your modpack version, please edit it in "Version" under "Edit Instance".
+CLS
+
+echo Multi-AOF 1.2 - Setup Script
+echo.
+echo Excecuting Script...
+echo - [Automatic] Download ServerStarter 2.4.0 from TeamAOF's GitHub.
+echo - [Automatic] Launch another terminal that downloads the base modpack using ServerStarter.
+echo - [Manual] Set the Multi-MC Instance Name. (%InstanceName%)
+echo - [Semi-Automatic] Allow if asked to download dependencies and to trust "7Zip4Powershell" to be temporarely downloaded despite being on an "insecure" repository.
+echo - [Manual] Close ServerStarter to be able to continue the script when asked to agree to Mojang's EULA.
+echo - [Automatic] Inserts Extra Mods, Ressources and then Shader Packs into their respective folders.
+echo - [Automatic] Delete Common Server Files.
+echo - [Automatic] Create a .ZIP that's compatible with Multi-MC
+echo - [Automatic] Uninstall "7Zip4Powershell" <-
+echo.
+powershell "Uninstall-Module -Name 7Zip4PowerShell"
+
+CLS
+
+echo Multi-AOF 1.2 - Setup Script
+echo.
+echo The script is now complete !
+echo An explorer Window should open where %InstanceName%.zip is located, which you can drag and drop into Multi-MC ! 
+echo Note that it may take a long while to show up and do not be afraid if Multi-MC freezes for some time.
+echo.
+echo Thank you for using Multi-AOF ! Press any key to close the script.
 start explorer.exe "%ZipLoc%"
-pause
+pause >nul
+exit
