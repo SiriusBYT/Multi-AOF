@@ -25,7 +25,7 @@ Due to current limitations (from the lack of programming knowledge on my part) t
 - All of Fabric 5's Server YAML
 
 - All of Fabric 6's Server YAML
-- 
+
 <h4>Tested Windows Versions</h4>
 - Windows 11 Enterprise N Insider Dev
 
