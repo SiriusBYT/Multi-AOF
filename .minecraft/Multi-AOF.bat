@@ -32,6 +32,7 @@ cd ..
 set "MultInst=%cd%"
 cd ..
 set "ZipLoc=%cd%"
+cd %DotMC%
 
 echo Multi-AOF 1.2 - Setup Script
 echo.
@@ -40,7 +41,7 @@ echo Before starting, please note that the following steps will be done:
 echo - [Automatic] Download ServerStarter 2.4.0 from TeamAOF's GitHub.
 echo - [Automatic] Launch another terminal that downloads the base modpack using ServerStarter.
 echo - [Manual] Set the Multi-MC Instance Name.
-echo - [Semi-Automatic] Allow if asked to download dependencies and to trust "7Zip4Powershell" to be temporarely downloaded despite being on an "insecure" repository.
+echo - [Semi-Automatic] Allow if asked to download dependencies and to trust "7Zip4Powershell" to be downloaded due to insecure repository limitations.
 echo - [Manual] Close ServerStarter to be able to continue the script when asked to agree to Mojang's EULA.
 echo - [Automatic] Inserts Extra Mods, Ressources and then Shader Packs into their respective folders.
 echo - [Automatic] Delete Common Server Files.
@@ -55,10 +56,10 @@ CLS
 echo Multi-AOF 1.2 - Setup Script
 echo.
 echo Excecuting Script...
-echo - [Automatic] Download ServerStarter 2.4.0 from TeamAOF's GitHub. <-
+echo - [Automatic] Download ServerStarter 2.4.0 from TeamAOF's GitHub. ^<--
 echo - [Automatic] Launch another terminal that downloads the base modpack using ServerStarter.
 echo - [Manual] Set the Multi-MC Instance Name.
-echo - [Semi-Automatic] Allow if asked to download dependencies and to trust "7Zip4Powershell" to be temporarely downloaded despite being on an "insecure" repository.
+echo - [Semi-Automatic] Allow if asked to download dependencies and to trust "7Zip4Powershell" to be downloaded due to insecure repository limitations.
 echo - [Manual] Close ServerStarter to be able to continue the script when asked to agree to Mojang's EULA.
 echo - [Automatic] Inserts Extra Mods, Ressources and then Shader Packs into their respective folders.
 echo - [Automatic] Delete Common Server Files.
@@ -75,16 +76,15 @@ echo Multi-AOF 1.2 - Setup Script
 echo.
 echo Excecuting Script...
 echo - [Automatic] Download ServerStarter 2.4.0 from TeamAOF's GitHub. 
-echo - [Automatic] Launch another terminal that downloads the base modpack using ServerStarter. <-
+echo - [Automatic] Launch another terminal that downloads the base modpack using ServerStarter. ^<--
 echo - [Manual] Set the Multi-MC Instance Name.
-echo - [Semi-Automatic] Allow if asked to download dependencies and to trust "7Zip4Powershell" to be temporarely downloaded despite being on an "insecure" repository.
+echo - [Semi-Automatic] Allow if asked to download dependencies and to trust "7Zip4Powershell" to be downloaded due to insecure repository limitations.
 echo - [Manual] Close ServerStarter to be able to continue the script when asked to agree to Mojang's EULA.
 echo - [Automatic] Inserts Extra Mods, Ressources and then Shader Packs into their respective folders.
 echo - [Automatic] Delete Common Server Files.
 echo - [Automatic] Create a .ZIP that's compatible with Multi-MC
 echo - [Automatic] Uninstall "7Zip4Powershell"
 echo.
-cd %DotMC%
 start SSJD.bat
 
 CLS
@@ -94,8 +94,8 @@ echo.
 echo Excecuting Script...
 echo - [Automatic] Download ServerStarter 2.4.0 from TeamAOF's GitHub.
 echo - [Automatic] Launch another terminal that downloads the base modpack using ServerStarter.
-echo - [Manual] Set the Multi-MC Instance Name. <-
-echo - [Semi-Automatic] Allow if asked to download dependencies and to trust "7Zip4Powershell" to be temporarely downloaded despite being on an "insecure" repository.
+echo - [Manual] Set the Multi-MC Instance Name. ^<--
+echo - [Semi-Automatic] Allow if asked to download dependencies and to trust "7Zip4Powershell" to be downloaded due to insecure repository limitations.
 echo - [Manual] Close ServerStarter to be able to continue the script when asked to agree to Mojang's EULA.
 echo - [Automatic] Inserts Extra Mods, Ressources and then Shader Packs into their respective folders.
 echo - [Automatic] Delete Common Server Files.
@@ -114,7 +114,7 @@ echo Excecuting Script...
 echo - [Automatic] Download ServerStarter 2.4.0 from TeamAOF's GitHub.
 echo - [Automatic] Launch another terminal that downloads the base modpack using ServerStarter.
 echo - [Manual] Set the Multi-MC Instance Name. (%InstanceName%)
-echo - [Semi-Automatic] Allow if asked to download dependencies and to trust "7Zip4Powershell" to be temporarely downloaded despite being on an "insecure" repository. <-
+echo - [Semi-Automatic] Allow if asked to download dependencies and to trust "7Zip4Powershell" to be downloaded due to insecure repository limitations. ^<--
 echo - [Manual] Close ServerStarter to be able to continue the script when asked to agree to Mojang's EULA.
 echo - [Automatic] Inserts Extra Mods, Ressources and then Shader Packs into their respective folders.
 echo - [Automatic] Delete Common Server Files.
@@ -131,8 +131,8 @@ echo Excecuting Script...
 echo - [Automatic] Download ServerStarter 2.4.0 from TeamAOF's GitHub.
 echo - [Automatic] Launch another terminal that downloads the base modpack using ServerStarter.
 echo - [Manual] Set the Multi-MC Instance Name. (%InstanceName%)
-echo - [Semi-Automatic] Allow if asked to download dependencies and to trust "7Zip4Powershell" to be temporarely downloaded despite being on an "insecure" repository.
-echo - [Manual] Close ServerStarter to be able to continue the script when asked to agree to Mojang's EULA. <-
+echo - [Semi-Automatic] Allow if asked to download dependencies and to trust "7Zip4Powershell" to be downloaded due to insecure repository limitations.
+echo - [Manual] Close ServerStarter to be able to continue the script when asked to agree to Mojang's EULA. ^<--
 echo - [Automatic] Inserts Extra Mods, Ressources and then Shader Packs into their respective folders.
 echo - [Automatic] Delete Common Server Files.
 echo - [Automatic] Create a .ZIP that's compatible with Multi-MC
@@ -149,9 +149,9 @@ echo Excecuting Script...
 echo - [Automatic] Download ServerStarter 2.4.0 from TeamAOF's GitHub.
 echo - [Automatic] Launch another terminal that downloads the base modpack using ServerStarter.
 echo - [Manual] Set the Multi-MC Instance Name. (%InstanceName%)
-echo - [Semi-Automatic] Allow if asked to download dependencies and to trust "7Zip4Powershell" to be temporarely downloaded despite being on an "insecure" repository.
+echo - [Semi-Automatic] Allow if asked to download dependencies and to trust "7Zip4Powershell" to be downloaded due to insecure repository limitations.
 echo - [Manual] Close ServerStarter to be able to continue the script when asked to agree to Mojang's EULA.
-echo - [Automatic] Inserts Extra Mods, Ressources and then Shader Packs into their respective folders. <-
+echo - [Automatic] Inserts Extra Mods, Ressources and then Shader Packs into their respective folders. ^<--
 echo - [Automatic] Delete Common Server Files.
 echo - [Automatic] Create a .ZIP that's compatible with Multi-MC
 echo - [Automatic] Uninstall "7Zip4Powershell"
@@ -172,10 +172,10 @@ echo Excecuting Script...
 echo - [Automatic] Download ServerStarter 2.4.0 from TeamAOF's GitHub.
 echo - [Automatic] Launch another terminal that downloads the base modpack using ServerStarter.
 echo - [Manual] Set the Multi-MC Instance Name. (%InstanceName%)
-echo - [Semi-Automatic] Allow if asked to download dependencies and to trust "7Zip4Powershell" to be temporarely downloaded despite being on an "insecure" repository.
+echo - [Semi-Automatic] Allow if asked to download dependencies and to trust "7Zip4Powershell" to be downloaded due to insecure repository limitations.
 echo - [Manual] Close ServerStarter to be able to continue the script when asked to agree to Mojang's EULA.
 echo - [Automatic] Inserts Extra Mods, Ressources and then Shader Packs into their respective folders.
-echo - [Automatic] Delete Common Server Files. <-
+echo - [Automatic] Delete Common Server Files. ^<--
 echo - [Automatic] Create a .ZIP that's compatible with Multi-MC
 echo - [Automatic] Uninstall "7Zip4Powershell"
 echo.
@@ -207,11 +207,11 @@ echo Excecuting Script...
 echo - [Automatic] Download ServerStarter 2.4.0 from TeamAOF's GitHub.
 echo - [Automatic] Launch another terminal that downloads the base modpack using ServerStarter.
 echo - [Manual] Set the Multi-MC Instance Name. (%InstanceName%)
-echo - [Semi-Automatic] Allow if asked to download dependencies and to trust "7Zip4Powershell" to be temporarely downloaded despite being on an "insecure" repository.
+echo - [Semi-Automatic] Allow if asked to download dependencies and to trust "7Zip4Powershell" to be downloaded due to insecure repository limitations.
 echo - [Manual] Close ServerStarter to be able to continue the script when asked to agree to Mojang's EULA.
 echo - [Automatic] Inserts Extra Mods, Ressources and then Shader Packs into their respective folders.
 echo - [Automatic] Delete Common Server Files.
-echo - [Automatic] Create a .ZIP that's compatible with Multi-MC <-
+echo - [Automatic] Create a .ZIP that's compatible with Multi-MC ^<--
 echo - [Automatic] Uninstall "7Zip4Powershell"
 echo.
 powershell "Compress-7zip -Path '%MultInst%' -ArchiveFilename '%InstanceName%.zip' -Format Zip"
@@ -224,12 +224,12 @@ echo Excecuting Script...
 echo - [Automatic] Download ServerStarter 2.4.0 from TeamAOF's GitHub.
 echo - [Automatic] Launch another terminal that downloads the base modpack using ServerStarter.
 echo - [Manual] Set the Multi-MC Instance Name. (%InstanceName%)
-echo - [Semi-Automatic] Allow if asked to download dependencies and to trust "7Zip4Powershell" to be temporarely downloaded despite being on an "insecure" repository.
+echo - [Semi-Automatic] Allow if asked to download dependencies and to trust "7Zip4Powershell" to be downloaded due to insecure repository limitations.
 echo - [Manual] Close ServerStarter to be able to continue the script when asked to agree to Mojang's EULA.
 echo - [Automatic] Inserts Extra Mods, Ressources and then Shader Packs into their respective folders.
 echo - [Automatic] Delete Common Server Files.
 echo - [Automatic] Create a .ZIP that's compatible with Multi-MC
-echo - [Automatic] Uninstall "7Zip4Powershell" <-
+echo - [Automatic] Uninstall "7Zip4Powershell" ^<--
 echo.
 powershell "Uninstall-Module -Name 7Zip4PowerShell"
 
@@ -241,7 +241,7 @@ echo The script is now complete !
 echo An explorer Window should open where %InstanceName%.zip is located, which you can drag and drop into Multi-MC ! 
 echo Note that it may take a long while to show up and do not be afraid if Multi-MC freezes for some time.
 echo.
-echo Thank you for using Multi-AOF ! Press any key to close the script.
+echo Thank you for using Multi-AOF ! Press any key to close the Script.
 start explorer.exe "%ZipLoc%"
 pause >nul
 exit
