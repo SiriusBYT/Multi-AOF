@@ -1,0 +1,4 @@
+- Give up Compression and instead somehow find a way to locate Multi-MC's Instance folder and copy everything from Multi-AOF to Multi-MC directly (Fixes a severe bug on low end system and the attrochous waiting times when importing the instance)
+- Implement Extra-Config
+- Give up Extra Folders to instead be fully online only (download from the web the extra files)
+- Option to delete the default Resource / Shader packs from the base modpack
