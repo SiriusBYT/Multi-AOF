@@ -12,7 +12,7 @@ CD "%~dp0" >nul 2>&1
 
 :CHECK
 REM Multi-AOF Version
-set "MVER=Multi-AOF SID-1.2.1 [121-08]"
+set "MVER=Multi-AOF SID-1.2.1 [121-09]"
 
 REM Sets some variables to be used to make the ZIP file.
 cd %cd%
