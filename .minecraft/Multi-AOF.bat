@@ -12,7 +12,7 @@ CD "%~dp0" >nul 2>&1
 
 :CHECK
 REM Multi-AOF Version
-set "MVER=Multi-AOF SID-1.2.1 [121-06]"
+set "MVER=Multi-AOF SID-1.2.1 [121-08]"
 
 REM Sets some variables to be used to make the ZIP file.
 cd %cd%
@@ -30,14 +30,14 @@ IF %DotMC%==%RealDotMC% (
    echo.
    echo WARNING: You have extracted MultiAOF where your normal .minecraft is located.
    echo [!] THIS CAN CAUSE DATA LOSS DURING THE CLEAN-UP PROCESS [!]
-   echo To prevent further damage to your files, MultiAOF is self destructing.
-   echo Only MultiAOF.bat should remain in your real .minecraft folder to be deleted.
+   echo To prevent further damage to your files, Multi-AOF is self destructing.
+   echo Only Multi-AOF.bat should remain in your real .minecraft folder to be deleted.
    echo.
-   echo Close the program and please extract MultiAOF in a different folder !
-   del Extra-Config /F /Q
-   del Extra-Mods /F /Q
-   del Extra-Resource_Packs /F /Q
-   del Extra-Shader_Packs /F /Q
+   echo Close the program and please extract Multi-AOF in a different folder !
+   rmdir Extra-Config /S /Q
+   rmdir Extra-Mods /S /Q
+   rmdir Extra-Resource_Packs /S /Q
+   rmdir Extra-Shader_Packs /S /Q
    del Insert-SSConfig_Here.yaml /F /Q
    del server-setup-config.yaml /F  /Q
    del SSJD.bat /F /Q
@@ -52,6 +52,7 @@ IF %DotMC%==%RealDotMC% (
 
 REM Checks if SSConfig is present, if not then the user did an oopsie. 
 IF NOT EXIST "%cd%\server-setup-config.yaml" (
+   color 4F
    echo %MVER% - Setup Script
    echo.
    echo Welcome to Multi-AOF ! This is a batch script that will download a modpack and inject extra mods, ressources and shader packs to then create a Multi-MC Instance.
@@ -208,13 +209,13 @@ echo - [Automatic] Delete Common Server Files. ^<--
 echo - [Automatic] Create a .ZIP that's compatible with Multi-MC
 echo - [Automatic] Uninstall "7Zip4Powershell"
 echo.
-del .fabric /F /Q
-del libraries /F /Q
-del versions /F /Q
-del log /F /Q
-del Extra-Mods /F /Q
-del Extra-Ressource_Packs /F /Q
-del Extra-Shader_Packs /F /Q
+rmdir .fabric /S /Q
+rmdir libraries /S /Q
+rmdir versions /S /Q
+rmdir log /S /Q
+rmdir Extra-Mods /S /Q
+rmdir Extra-Ressource_Packs /S /Q
+rmdir Extra-Shader_Packs /S /Q
 del fabricloader.log /F /Q
 del fabric-server-launch.jar /F /Q
 del fabric-server-launcher.properties /F /Q
