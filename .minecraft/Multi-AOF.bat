@@ -11,10 +11,35 @@ REM For example, if "run as admin" the batch starting dir could be system32
 CD "%~dp0" >nul 2>&1
 
 :CHECK
+REM Multi-AOF Version
+set "MVER=Multi-AOF SID-1.2.1 [121-02]"
+
+REM Sets some variables to be used to make the ZIP file.
+cd %cd%
+set "DotMC=%cd%"
+cd ..
+set "MultInst=%cd%"
+cd ..
+set "ZipLoc=%cd%"
+cd %DotMC%
+set "RealDotMC=%AppData%\.minecraft"
+
+REM If it's there and I had to made an update it's for a reason. This actually happened.
+IF %DotMC%==%RealDotMC% (
+   echo %MVER% - Setup Script
+   echo.
+   echo WARNING: You have extracted MultiAOF where your normal .minecraft is located.
+   echo [!] THIS CAN CAUSE DATA LOSS DURING THE CLEAN-UP PROCESS [!]
+   echo To prevent further damage to your files, MultiAOF is self destructing.
+   echo Only MultiAOF.bat should remain in your real .minecraft folder to be deleted.
+   echo.
+   echo Close the program and please extract MultiAOF in a different folder !
+   goto SelfDestruct
+) 
 
 REM Checks if SSConfig is present, if not then the user did an oopsie. 
 IF NOT EXIST "%cd%\server-setup-config.yaml" (
-   echo Multi-AOF 1.2 - Setup Script
+   echo %MVER% - Setup Script
    echo.
    echo Welcome to Multi-AOF ! This is a batch script that will download a modpack and inject extra mods, ressources and shader packs to then create a Multi-MC Instance.
    echo However it seems that "server-setup-config.yaml" is missing in %cd%.
@@ -25,16 +50,7 @@ IF NOT EXIST "%cd%\server-setup-config.yaml" (
    exit
 ) 
 
-REM Sets some variables to be used to make the ZIP file.
-cd %cd%
-set "DotMC=%cd%"
-cd ..
-set "MultInst=%cd%"
-cd ..
-set "ZipLoc=%cd%"
-cd %DotMC%
-
-echo Multi-AOF 1.2 - Setup Script
+echo %MVER% - Setup Script
 echo.
 echo Welcome to Multi-AOF ! This is a batch script that will download a modpack and inject extra mods, ressources and shader packs to then create a Multi-MC Instance.
 echo Before starting, please note that the following steps will be done:
@@ -53,7 +69,7 @@ pause >nul
 
 CLS
 
-echo Multi-AOF 1.2 - Setup Script
+echo %MVER% - Setup Script
 echo.
 echo Excecuting Script...
 echo - [Automatic] Download ServerStarter 2.4.0 from TeamAOF's GitHub. ^<--
@@ -72,7 +88,7 @@ IF NOT EXIST "%cd%\serverstarter-2.4.0.jar" (
 )
 CLS
 
-echo Multi-AOF 1.2 - Setup Script
+echo %MVER% - Setup Script
 echo.
 echo Excecuting Script...
 echo - [Automatic] Download ServerStarter 2.4.0 from TeamAOF's GitHub. 
@@ -89,7 +105,7 @@ start SSJD.bat
 
 CLS
 
-echo Multi-AOF 1.2 - Setup Script
+echo %MVER% - Setup Script
 echo.
 echo Excecuting Script...
 echo - [Automatic] Download ServerStarter 2.4.0 from TeamAOF's GitHub.
@@ -108,7 +124,7 @@ set /P InstanceName=
 
 CLS
 
-echo Multi-AOF 1.2 - Setup Script
+echo %MVER% - Setup Script
 echo.
 echo Excecuting Script...
 echo - [Automatic] Download ServerStarter 2.4.0 from TeamAOF's GitHub.
@@ -125,7 +141,7 @@ powershell "Install-Module -Name 7Zip4PowerShell -Verbose -Scope CurrentUser"
 
 CLS
 
-echo Multi-AOF 1.2 - Setup Script
+echo %MVER% - Setup Script
 echo.
 echo Excecuting Script...
 echo - [Automatic] Download ServerStarter 2.4.0 from TeamAOF's GitHub.
@@ -143,7 +159,7 @@ pause >nul
 
 CLS
 
-echo Multi-AOF 1.2 - Setup Script
+echo %MVER% - Setup Script
 echo.
 echo Excecuting Script...
 echo - [Automatic] Download ServerStarter 2.4.0 from TeamAOF's GitHub.
@@ -166,7 +182,7 @@ move Extra-Shader_Packs\*.* shaderpacks\
 
 CLS
 
-echo Multi-AOF 1.2 - Setup Script
+echo %MVER% - Setup Script
 echo.
 echo Excecuting Script...
 echo - [Automatic] Download ServerStarter 2.4.0 from TeamAOF's GitHub.
@@ -205,7 +221,7 @@ del README.md /F /Q
 
 CLS
 
-echo Multi-AOF 1.2 - Setup Script
+echo %MVER% - Setup Script
 echo.
 echo Excecuting Script...
 echo - [Automatic] Download ServerStarter 2.4.0 from TeamAOF's GitHub.
@@ -223,7 +239,7 @@ powershell "Compress-7zip -Path '%MultInst%' -ArchiveFilename '%InstanceName%.zi
 
 CLS
 
-echo Multi-AOF 1.2 - Setup Script
+echo %MVER% - Setup Script
 echo.
 echo Excecuting Script...
 echo - [Automatic] Download ServerStarter 2.4.0 from TeamAOF's GitHub.
@@ -240,7 +256,7 @@ powershell "Uninstall-Module -Name 7Zip4PowerShell"
 
 CLS
 
-echo Multi-AOF 1.2 - Setup Script
+echo %MVER% - Setup Script
 echo.
 echo The script is now complete !
 echo An explorer Window should open where %InstanceName%.zip is located, which you can drag and drop into Multi-MC ! 
@@ -250,3 +266,11 @@ echo Thank you for using Multi-AOF ! Press any key to close the Script.
 start explorer.exe "%ZipLoc%"
 pause >nul
 exit
+
+:SelfDestruct {
+   color 4F
+   timeout /nobreak 1 >nul
+   color 40
+   timeout /nobreak 1 >nul
+   goto SelfDestruct
+}
