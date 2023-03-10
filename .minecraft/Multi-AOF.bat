@@ -12,7 +12,7 @@ CD "%~dp0" >nul 2>&1
 
 :CHECK
 REM Multi-AOF Version
-set "MVER=Multi-AOF SID-1.2.1 [121-03]"
+set "MVER=Multi-AOF SID-1.2.1 [121-06]"
 
 REM Sets some variables to be used to make the ZIP file.
 cd %cd%
@@ -34,7 +34,20 @@ IF %DotMC%==%RealDotMC% (
    echo Only MultiAOF.bat should remain in your real .minecraft folder to be deleted.
    echo.
    echo Close the program and please extract MultiAOF in a different folder !
-   goto SelfDestruct
+   del Extra-Config /F /Q
+   del Extra-Mods /F /Q
+   del Extra-Resource_Packs /F /Q
+   del Extra-Shader_Packs /F /Q
+   del Insert-SSConfig_Here.yaml /F /Q
+   del server-setup-config.yaml /F  /Q
+   del SSJD.bat /F /Q
+   cd ..
+   del instance.cfg /F /Q
+   del LICENSE.md /F /Q
+   del mmc-pack.json /F /Q
+   del pack.png /F /Q
+   del README.md /F /Q
+   goto SelfDestructFlash
 ) 
 
 REM Checks if SSConfig is present, if not then the user did an oopsie. 
@@ -267,10 +280,10 @@ start explorer.exe "%ZipLoc%"
 pause >nul
 exit
 
-:SelfDestruct {
+:SelfDestructFlash {
    color 4F
    timeout /nobreak 1 >nul
    color 40
    timeout /nobreak 1 >nul
-   goto SelfDestruct
+   goto SelfDestructFlash
 }
